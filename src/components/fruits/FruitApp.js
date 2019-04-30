@@ -1,47 +1,43 @@
 import React from 'react';
 import FruitList from './FruitList';
-import FruitForm from './FruitForm'
+import FruitForm from './FruitForm';
+
 class FruitApp extends React.Component {
 
-    constructor() {
-        super();
+   constructor(){
+      super();
 
-        this.state = {
-            fruitData: ["Pommes", "Poires", "Tomates"]
+      this.state = {
+         fruitData: ["Pommes", "Poires", "Tomates"]
+      }
 
-        }
-        this.deleteFruit = this.deleteFruit.bind(this);
-        this.addFruit = this.addFruit.bind(this);
-    }
+      this.deleteFruit = this.deleteFruit.bind(this);
+      this.addFruit = this.addFruit.bind(this);
+   }
 
-    deleteFruit(index) {
-        let fruits = this.state.fruitData;
-        fruits.splice(index, 1);
-        this.setState({ fruitData: fruits });
+   deleteFruit(index){
+      let fruits = this.state.fruitData;
+      fruits.splice(index,1);
+      this.setState({fruitData: fruits});
+   }
 
-    }
+   addFruit(fruitName){
+      let fruits = this.state.fruitData;
+      fruits.push(fruitName);
+      fruits.sort();
+      this.setState({fruitData: fruits});
+   }
 
-    addFruit(fruitName){
-        let fruits = this.state.fruitData;
-        fruits.push(fruitName);
-        this.setState({fruitData: fruits});
-    }
-
-    render() {
-        return (<div>
-            <h1>Listes des fruits </h1>
-            <FruitForm/>
-            <FruitList
-                list={this.state.fruitData}
-                removeItem={this.deleteFruit}
-            />
-
-
-
-
-        </div>);
-    }
+   render(){
+      return (<div>
+         <h1>Listes des fruits </h1>
+         <FruitForm addItem={this.addFruit}/>
+         <FruitList 
+            list={this.state.fruitData} 
+            removeItem={this.deleteFruit}
+         />
+      </div>);
+   }
 }
-
 
 export default FruitApp;
